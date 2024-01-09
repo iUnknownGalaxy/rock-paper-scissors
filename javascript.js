@@ -4,11 +4,11 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
 
-function getComputerChoice(choice) {
+function getComputerChoice(randomChoice) {
     if(randomChoice === 1) {
         return "rock";
     } else if(randomChoice === 2) {
-        return "pcissors";
+        return "scissors";
     } else {
         return "paper";
     }
@@ -23,9 +23,9 @@ function getPlayerChoice() {
 }
 
 function getChoices() {
-    randomChoice = getRandomIntInclusive(1,3);
-    computerChoice = getComputerChoice();
-    playerChoice = getPlayerChoice();
+    let randomChoice = getRandomIntInclusive(1,3);
+    let computerChoice = getComputerChoice(randomChoice);
+    let playerChoice = getPlayerChoice();
     return playRound(playerChoice, computerChoice);
 }
 
@@ -36,24 +36,30 @@ function playRound(playerSelection, computerSelection) {
             console.log("It was a tie! Please re-play the round");
             return getChoices();
         } else if(computerSelection === "paper") {
-            return "You lose! Paper beats Rock";
+            console.log("You lose! Paper beats Rock");
+            return -1;
         } else {
-            return "You win! Rock beats scissors"
+            console.log("You win! Rock beats scissors");
+            return 1;
         }
     } else if(playerSelection === "paper") {
         if(computerSelection === "rock") {
-            return "You win! Paper beats Rock";
+            console.log("You win! Paper beats Rock");
+            return 1;
         } else if(computerSelection === "paper") {
             console.log("It was a tie! Please re-play the round");
             return getChoices();
         } else {
-            return "You lose! Scissors beats paper";
+            console.log("You lose! Scissors beats paper");
+            return -1;
         }
     } else {
         if(computerSelection === "rock") {
-            return "You lose! Rock beats scissors";
+            console.log("You lose the round! Rock beats scissors");
+            return -1;
         } else if(computerSelection === "paper") {
-            return "You Win! Scissors beats paper";
+            console.log("You Win! Scissors beats paper");
+            return 1;
         } else {
             console.log("It was a tie! Please re-play the round");
             return getChoices();
@@ -61,6 +67,25 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function game() {
+    let playerWins = 0;
+    let computerWins = 0;
+    for(let i = 1; i <= 5; i++) {
+        let result = getChoices();
+        if(result < 0) {
+            computerWins++;
+        } else {
+            playerWins++;
+        }
+        console.log(playerWins, computerWins);
+        if(playerWins === 3) {
+            console.log("You win the game!")
+            break;
+        } else if(computerWins === 3) {
+            console.log("You lost the game...")
+            break;
+        }
+    }
+}
 
-let result = getChoices();
-console.log(result);
+game();
