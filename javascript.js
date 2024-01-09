@@ -14,7 +14,15 @@ function getComputerChoice(choice) {
     }
 }
 
+function getPlayerChoice() {
+    let playerChoice = prompt("Please pick Rock, Paper, or Scissors:").toLowerCase;
+    while(playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
+        playerChoice = prompt("Invalid input. Please re-enter your option (Rock, Paper, or Scissors): ")
+    }
+    return playerChoice;
+}
+
 let randomChoice = getRandomIntInclusive(1,3);
 let computerChoice = getComputerChoice();
-console.log(randomChoice);
-console.log(computerChoice);
+let playerChoice = getPlayerChoice();
+console.log(playerChoice);
