@@ -6,23 +6,61 @@ function getRandomIntInclusive(min, max) {
 
 function getComputerChoice(choice) {
     if(randomChoice === 1) {
-        return "Rock";
+        return "rock";
     } else if(randomChoice === 2) {
-        return "Scissors";
+        return "pcissors";
     } else {
-        return "Paper";
+        return "paper";
     }
 }
 
 function getPlayerChoice() {
-    let playerChoice = prompt("Please pick Rock, Paper, or Scissors:").toLowerCase;
+    let playerChoice = prompt("Please pick Rock, Paper, or Scissors:");
     while(playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
         playerChoice = prompt("Invalid input. Please re-enter your option (Rock, Paper, or Scissors): ")
     }
-    return playerChoice;
+    return playerChoice.toLowerCase();
 }
 
-let randomChoice = getRandomIntInclusive(1,3);
-let computerChoice = getComputerChoice();
-let playerChoice = getPlayerChoice();
-console.log(playerChoice);
+function getChoices() {
+    randomChoice = getRandomIntInclusive(1,3);
+    computerChoice = getComputerChoice();
+    playerChoice = getPlayerChoice();
+    return playRound(playerChoice, computerChoice);
+}
+
+
+function playRound(playerSelection, computerSelection) {
+    if(playerSelection === "rock") {
+        if(computerSelection === "rock") {
+            console.log("It was a tie! Please re-play the round");
+            return getChoices();
+        } else if(computerSelection === "paper") {
+            return "You lose! Paper beats Rock";
+        } else {
+            return "You win! Rock beats scissors"
+        }
+    } else if(playerSelection === "paper") {
+        if(computerSelection === "rock") {
+            return "You win! Paper beats Rock";
+        } else if(computerSelection === "paper") {
+            console.log("It was a tie! Please re-play the round");
+            return getChoices();
+        } else {
+            return "You lose! Scissors beats paper";
+        }
+    } else {
+        if(computerSelection === "rock") {
+            return "You lose! Rock beats scissors";
+        } else if(computerSelection === "paper") {
+            return "You Win! Scissors beats paper";
+        } else {
+            console.log("It was a tie! Please re-play the round");
+            return getChoices();
+        }
+    }
+}
+
+
+let result = getChoices();
+console.log(result);
