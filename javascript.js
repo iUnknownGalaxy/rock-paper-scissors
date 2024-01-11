@@ -94,31 +94,51 @@ let computerScore = 0;
 rock.addEventListener('click', () => {
     let newScore = playRound("rock", getComputerChoice(getRandomIntInclusive(1,3)));
     checkScore(newScore);
-    showPlayerScore.textContent = "You: " + playerScore;
-    showComputerScore.textContent = "Computer: " + computerScore;
 })
 
 paper.addEventListener('click', () => {
     let newScore = playRound("paper", getComputerChoice(getRandomIntInclusive(1,3)));
     checkScore(newScore);
-    showPlayerScore.textContent = "You: " + playerScore;
-    showComputerScore.textContent = "Computer: " + computerScore;
 })
 
 scissors.addEventListener('click', () => {
     let newScore = playRound("scissors", getComputerChoice(getRandomIntInclusive(1,3)));
     checkScore(newScore);
-    showPlayerScore.textContent = "You: " + playerScore;
-    showComputerScore.textContent = "Computer: " + computerScore;
+    
 })
 
+function updateScoreDisplay() {
+    showPlayerScore.textContent = "You: " + playerScore;
+    showComputerScore.textContent = "Computer: " + computerScore;
+}
+
 function checkScore(newScore) {
-    if(newScore < 0) {
+    if (newScore < 0) {
         computerScore++;
-    } else if(newScore > 0) {
+    } else if (newScore > 0) {
         playerScore++;
     }
+
+    updateScoreDisplay();
+
+    if (computerScore === 5 || playerScore === 5) {
+        setTimeout(() => {
+            if (computerScore === 5) {
+                alert("You lost! The computer won... Try again!");
+            } else if (playerScore === 5) {
+                alert("You won! Congratulations, but try again!");
+            }
+            resetScores();
+        }, 100);
+    }
 }
+
+function resetScores() {
+    computerScore = 0;
+    playerScore = 0;
+    updateScoreDisplay();
+}
+
 container.appendChild(scoreboard);
 scoreboard.appendChild(showPlayerScore);
 scoreboard.appendChild(showComputerScore);
