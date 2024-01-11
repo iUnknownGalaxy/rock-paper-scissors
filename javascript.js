@@ -84,13 +84,5 @@ container.appendChild(paper);
 container.appendChild(scissors);
 
 
-rock.addEventListener('click', () => {
-    playRound("rock", getComputerChoice(getRandomIntInclusive()))
-});
-paper.addEventListener('click', () => {
-    playRound("paper", getComputerChoice(getRandomIntInclusive()))
-});
-scissors.addEventListener('click', () => {
-    playRound("scissors", getComputerChoice(getRandomIntInclusive()))
-})
+
 
