@@ -67,25 +67,30 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let playerWins = 0;
-    let computerWins = 0;
-    for(let i = 1; i <= 5; i++) {
-        let result = getChoices();
-        if(result < 0) {
-            computerWins++;
-        } else {
-            playerWins++;
-        }
-        console.log(playerWins, computerWins);
-        if(playerWins === 3) {
-            console.log("You win the game!")
-            break;
-        } else if(computerWins === 3) {
-            console.log("You lost the game...")
-            break;
-        }
-    }
-}
 
-game();
+
+const rock = document.createElement('button');
+const paper = document.createElement('button');
+const scissors = document.createElement('button');
+const container = document.getElementById("container");
+
+rock.innerText = 'rock';
+paper.innerText = 'paper';
+scissors.innerText = 'scissors';
+
+
+container.appendChild(rock);
+container.appendChild(paper);
+container.appendChild(scissors);
+
+
+rock.addEventListener('click', () => {
+    playRound("rock", getComputerChoice(getRandomIntInclusive()))
+});
+paper.addEventListener('click', () => {
+    playRound("paper", getComputerChoice(getRandomIntInclusive()))
+});
+scissors.addEventListener('click', () => {
+    playRound("scissors", getComputerChoice(getRandomIntInclusive()))
+})
+
