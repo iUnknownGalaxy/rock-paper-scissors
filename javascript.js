@@ -33,43 +33,52 @@ function getChoices() {
 function playRound(playerSelection, computerSelection) {
     if(playerSelection === "rock") {
         if(computerSelection === "rock") {
-            console.log("It was a tie! Please re-play the round");
+            showRoundWinner.textContent = "It was a tie! Please re-play the round";
+            return 0;
         } else if(computerSelection === "paper") {
-            console.log("You lose! Paper beats Rock");
+            showRoundWinner.textContent = "You lose! Paper beats Rock";
             return -1;
         } else {
-            console.log("You win! Rock beats scissors");
+            showRoundWinner.textContent = "You win! Rock beats scissors";
             return 1;
         }
     } else if(playerSelection === "paper") {
         if(computerSelection === "rock") {
-            console.log("You win! Paper beats Rock");
+            showRoundWinner.textContent = "You win! Paper beats Rock";
             return 1;
         } else if(computerSelection === "paper") {
-            console.log("It was a tie! Please re-play the round");
+            showRoundWinner.textContent = "It was a tie! Please re-play the round";
+            return 0;
         } else {
-            console.log("You lose! Scissors beats paper");
+            showRoundWinner.textContent = "You lose! Scissors beats paper";
             return -1;
         }
     } else {
         if(computerSelection === "rock") {
-            console.log("You lose the round! Rock beats scissors");
+            showRoundWinner.textContent = "You lose! Rock beats scissors";
             return -1;
         } else if(computerSelection === "paper") {
-            console.log("You Win! Scissors beats paper");
+            showRoundWinner.textContent = "You Win! Scissors beats paper";
             return 1;
         } else {
-            console.log("It was a tie! Please re-play the round");
+            showRoundWinner.textContent = "It was a tie! Please re-play the round";
+            return 0;
         }
     }
 }
 
 
 
+
+
 const rock = document.createElement('button');
 const paper = document.createElement('button');
 const scissors = document.createElement('button');
-const container = document.getElementById("container");
+const container = document.getElementById('container');
+const scoreboard = document.createElement('div');
+const showPlayerScore = document.createElement('p');
+const showComputerScore = document.createElement('p');
+const showRoundWinner = document.createElement('p');
 
 rock.innerText = 'rock';
 paper.innerText = 'paper';
@@ -79,14 +88,38 @@ container.appendChild(rock);
 container.appendChild(paper);
 container.appendChild(scissors);
 
+let playerScore = 0;
+let computerScore = 0;
+
 rock.addEventListener('click', () => {
-    playRound("rock", getComputerChoice(getRandomIntInclusive(1,3)));
+    let newScore = playRound("rock", getComputerChoice(getRandomIntInclusive(1,3)));
+    checkScore(newScore);
+    showPlayerScore.textContent = "You: " + playerScore;
+    showComputerScore.textContent = "Computer: " + computerScore;
 })
 
 paper.addEventListener('click', () => {
-    playRound("paper", getComputerChoice(getRandomIntInclusive(1,3)));
+    let newScore = playRound("paper", getComputerChoice(getRandomIntInclusive(1,3)));
+    checkScore(newScore);
+    showPlayerScore.textContent = "You: " + playerScore;
+    showComputerScore.textContent = "Computer: " + computerScore;
 })
 
 scissors.addEventListener('click', () => {
-    playRound("scissors", getComputerChoice(getRandomIntInclusive(1,3)));
+    let newScore = playRound("scissors", getComputerChoice(getRandomIntInclusive(1,3)));
+    checkScore(newScore);
+    showPlayerScore.textContent = "You: " + playerScore;
+    showComputerScore.textContent = "Computer: " + computerScore;
 })
+
+function checkScore(newScore) {
+    if(newScore < 0) {
+        computerScore++;
+    } else if(newScore > 0) {
+        playerScore++;
+    }
+}
+container.appendChild(scoreboard);
+scoreboard.appendChild(showPlayerScore);
+scoreboard.appendChild(showComputerScore);
+scoreboard.appendChild(showRoundWinner);
