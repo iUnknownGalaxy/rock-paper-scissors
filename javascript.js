@@ -34,7 +34,6 @@ function playRound(playerSelection, computerSelection) {
     if(playerSelection === "rock") {
         if(computerSelection === "rock") {
             console.log("It was a tie! Please re-play the round");
-            return getChoices();
         } else if(computerSelection === "paper") {
             console.log("You lose! Paper beats Rock");
             return -1;
@@ -48,7 +47,6 @@ function playRound(playerSelection, computerSelection) {
             return 1;
         } else if(computerSelection === "paper") {
             console.log("It was a tie! Please re-play the round");
-            return getChoices();
         } else {
             console.log("You lose! Scissors beats paper");
             return -1;
@@ -62,7 +60,6 @@ function playRound(playerSelection, computerSelection) {
             return 1;
         } else {
             console.log("It was a tie! Please re-play the round");
-            return getChoices();
         }
     }
 }
@@ -78,11 +75,18 @@ rock.innerText = 'rock';
 paper.innerText = 'paper';
 scissors.innerText = 'scissors';
 
-
 container.appendChild(rock);
 container.appendChild(paper);
 container.appendChild(scissors);
 
+rock.addEventListener('click', () => {
+    playRound("rock", getComputerChoice(getRandomIntInclusive(1,3)));
+})
 
+paper.addEventListener('click', () => {
+    playRound("paper", getComputerChoice(getRandomIntInclusive(1,3)));
+})
 
-
+scissors.addEventListener('click', () => {
+    playRound("scissors", getComputerChoice(getRandomIntInclusive(1,3)));
+})
